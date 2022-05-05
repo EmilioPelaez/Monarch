@@ -4,4 +4,8 @@
 
 import Foundation
 
-struct UnhandledRequestError: Error {}
+public struct UnhandledRequestError: Error {
+	public init() {}
+}
+
+public struct URLBuilderError: Error {}

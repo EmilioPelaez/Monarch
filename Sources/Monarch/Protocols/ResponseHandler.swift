@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol ResponseHandler: RequestProvider {
-	func handle<R:Request>(_ response: R.ResponseType, for request: R)
+	func handle<R:Request>(_ response: R.Response, for request: R)
 }

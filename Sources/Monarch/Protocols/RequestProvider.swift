@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol RequestProvider: AnyObject {
-	func perform<R: Request>(_ request: R) async throws -> R.ResponseType
+	func perform<R: Request>(_ request: R) async throws -> R.Response
 }

@@ -6,7 +6,7 @@ import Foundation
 
 public struct HTTPBody {
 	
-	struct StringEncodingError: Error {}
+	public struct StringEncodingError: Error {}
 	
 	public enum ContentType {
 		case textPlain

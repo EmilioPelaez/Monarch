@@ -19,7 +19,7 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 		next?.previous = self
 	}
 	
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.Response where R : Request {
 		do {
 			let value = try await provider.perform(request)
 			handle(value, for: request)
@@ -32,7 +32,7 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 		}
 	}
 	
-	func handle<R>(_ response: R.ResponseType, for request: R) where R : Request {
+	func handle<R>(_ response: R.Response, for request: R) where R : Request {
 		if let handler = provider as? ResponseHandler {
 			handler.handle(response, for: request)
 		}
