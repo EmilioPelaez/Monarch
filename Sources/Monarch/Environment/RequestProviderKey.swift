@@ -16,13 +16,8 @@ struct RequestProviderNodeKey: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-	
 	var providerNode: RequestProviderNode {
 		get { self[RequestProviderNodeKey.self] }
 		set { self[RequestProviderNodeKey.self] = newValue }
-	}
-	
-	var requestProvider: RequestProvider {
-		providerNode
 	}
 }

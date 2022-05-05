@@ -11,11 +11,11 @@ let package = Package(
 			name: "Monarch",
 			targets: ["Monarch"]),
 	],
-	dependencies: [],
+	dependencies: [.package(url: "https://github.com/EmilioPelaez/HierarchyResponder", from: Version(1, 0, 0))],
 	targets: [
 		.target(
 			name: "Monarch",
-			dependencies: []),
+			dependencies: ["HierarchyResponder"]),
 		.testTarget(
 			name: "MonarchTests",
 			dependencies: ["Monarch"]),

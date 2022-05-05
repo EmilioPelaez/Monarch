@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct RequestProviderModifier: ViewModifier {
+struct RegisterProviderModifier: ViewModifier {
 	@Environment(\.providerNode) var providerNode: RequestProviderNode
 	
 	let provider: RequestProvider
@@ -19,6 +19,6 @@ struct RequestProviderModifier: ViewModifier {
 
 public extension View {
 	func registerProvider(_ provider: RequestProvider, domain: RequestDomain = .any) -> some View {
-		modifier(RequestProviderModifier(provider: provider, domain: domain))
+		modifier(RegisterProviderModifier(provider: provider, domain: domain))
 	}
 }
