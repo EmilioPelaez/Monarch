@@ -6,6 +6,7 @@ import Foundation
 
 public protocol Request {
 	associatedtype Response
+	associatedtype Packed
 	
 	var id: String { get }
 	var domain: RequestDomain { get }
@@ -15,9 +16,12 @@ public protocol Request {
 	var body: HTTPBody? { get }
 	var query: [String: Any] { get }
 	
-	var decode: (Data) throws -> Response { get }
-	
 	var previewData: Response { get }
+	
+	func decode(_ data: Data) throws -> Response
+	
+	func pack(_ response: Response) -> Packed?
+	func unpack(_ packed: Packed) -> Response?
 }
 
 public extension Request {
@@ -30,7 +34,25 @@ public extension Request {
 }
 
 public extension Request where Response: Decodable {
-	var decode: (Data) throws -> Response {
-		{ try JSONDecoder().decode(Response.self, from: $0) }
+	func decode(_ data: Data) throws -> Response {
+		try JSONDecoder().decode(Response.self, from: data)
+	}
+}
+
+public extension Request where Response == Packed {
+	func pack(_ response: Response) -> Packed? {
+		response
+	}
+	func unpack(_ packed: Packed) -> Response? {
+		packed
+	}
+}
+
+public extension Request where Response: Codable, Packed == Data {
+	func pack(_ response: Response) -> Packed? {
+		try? JSONEncoder().encode(response)
+	}
+	func unpack(_ packed: Packed) -> Response? {
+		try? JSONDecoder().decode(Response.self, from: packed)
 	}
 }
