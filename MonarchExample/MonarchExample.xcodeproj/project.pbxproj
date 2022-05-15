@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C8958B1E282A191B00341D09 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C8958B1D282A191B00341D09 /* Monarch */; };
+		C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8958B202831AEE700341D09 /* MemoryCache.swift */; };
 		C8D8E1D7282A187A002F62FD /* MonarchExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */; };
 		C8D8E1D9282A187A002F62FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D8E1D8282A187A002F62FD /* ContentView.swift */; };
 		C8D8E1DB282A187C002F62FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D8E1DA282A187C002F62FD /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C8958B202831AEE700341D09 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		C8D8E1D3282A187A002F62FD /* MonarchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonarchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonarchExampleApp.swift; sourceTree = "<group>"; };
 		C8D8E1D8282A187A002F62FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +44,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C8958B1F2831AED500341D09 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				C8958B202831AEE700341D09 /* MemoryCache.swift */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
 		C8D8E1CA282A187A002F62FD = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 			children = (
 				C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */,
 				C8D8E1D8282A187A002F62FD /* ContentView.swift */,
+				C8958B1F2831AED500341D09 /* Examples */,
 				C8D8E1DA282A187C002F62FD /* Assets.xcassets */,
 				C8D8E1DC282A187C002F62FD /* Preview Content */,
 			);
@@ -160,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */,
 				C8D8E1D9282A187A002F62FD /* ContentView.swift in Sources */,
 				C8D8E1D7282A187A002F62FD /* MonarchExampleApp.swift in Sources */,
 			);

@@ -21,3 +21,7 @@ struct MonarchExampleApp: App {
 class UserClient: NetworkProvider {
 	var baseURL = URL(string: "")!
 }
+
+extension RequestDomain {
+	static let users = RequestDomain(rawValue: 1 << 1)
+}
