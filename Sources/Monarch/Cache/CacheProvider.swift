@@ -4,8 +4,14 @@
 
 import Foundation
 
+/**
+ Cache providers can use the `pack` and `unpack` methods of a `Request` to
+ convert the response value into an object that can be stored more easily.
+ */
 public protocol CacheProvider: ResponseHandler {
+	/// Stores the value for a given request.
 	func store<R: Request>(_ value: R.Response, for request: R)
+	/// Attempts to stored value for a given request.
 	func value<R: Request>(for request: R) async -> R.Response?
 }
 

@@ -1,20 +1,20 @@
 # Monarch 👑 - WIP
 
-A resource based, protocol oriented networking library designed for pure-SwiftUI applications.
+A resource based, protocol oriented networking library designed for pure-SwiftUI applications. It's called Monarch because it sits at the top of your view hierarchy.
 
 ### Features:
 
  - Async/Await
  - Resource Based
  - Protocol Oriented
- - Caching Support
  - Preview Support
+ - Caching Support
  - Extensible
  - All the buzzwords!
 
 ### Description
 
-Monarch is a network library designed to harness the SwiftUI View Hierarchy to simplify dependency injection. It's called Monarch because it sits at the top of your hierarchy.
+Monarch is a network library designed to harness the SwiftUI View Hierarchy to simplify dependency injection.
 
 To use Monarch, you register one or multiple request providers at a very high level of your view hierarchy.
 
@@ -29,18 +29,18 @@ struct MonarchApp: App {
 }
 ```
 
-Any views lower in the view hierarchy can read the `requestProvider` environment value and use it to execute a request. Because requests contain a `previewData` value, views can be easily previewed in the Preview Canvas.
+Any views lower in the view hierarchy can read the `monarch` environment value and use it to execute a request. Because requests contain a `previewData` value, views can be easily previewed in the Preview Canvas.
 
 ```swift
 struct ContentView: View {
-  @Environment(\.requestProvider) var provider
+  @Environment(\.monarch) var monarch
   @State var user: User?
   
   var body: some View {
     Text(user?.name ?? "Loading...")
       .task {
         do {
-          user = try await provider.perform(CurrentUserRequest())
+          user = try await monarch.perform(CurrentUserRequest())
         } catch {
           print("Whoops")
         }

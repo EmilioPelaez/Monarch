@@ -4,13 +4,33 @@
 
 import Foundation
 
+/**
+ A provider protocol that fetches the response from the network using
+ `URLSession`.
+ 
+ Implementing a network client using the `NetworkProvider` protocol is usually
+ as simple as defining a `baseURL`.
+ 
+ ```
+ class NetworkClient: NetworkProvider {
+	 var baseURL = URL(string: myURL)!
+ }
+ ```
+ */
 public protocol NetworkProvider: RequestProvider {
+	/// The url that will be used as a prefix to create the resource URL
 	var baseURL: URL { get }
+	/// The URLSession to create the URL Data Task. `default` by default.
 	var session: URLSession { get }
 	
+	/// Returns a URL from a given Request
 	func buildURL<R: Request>(for request: R) throws -> URL
+	/// From a given Request, returns a URLRequest that can be used by
+	/// URLSession to create a data task
 	func buildURLRequest<R: Request>(for request: R) throws -> URLRequest
+	/// Fetches the Data and a URLResponse for a given request
 	func fetch<R: Request>(for request: R) async throws -> (Data, URLResponse)
+	///	 Validates a (Data, URLResponse) pair
 	func validate(data: Data, response: URLResponse) throws
 }
 

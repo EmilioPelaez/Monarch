@@ -4,6 +4,7 @@
 
 import Foundation
 
+/// An enum of the possible HTTP verbs for an HTTP request
 public enum HTTPMethod {
 	case GET
 	case POST

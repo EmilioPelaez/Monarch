@@ -4,6 +4,11 @@
 
 import Foundation
 
+/**
+ A very simple example that will store the result of any request in a dictionary.
+ 
+ You probably shouldn't use this on production.
+ */
 public class MemoryCache: CacheProvider {
 	var values: [String: Any] = [:]
 	

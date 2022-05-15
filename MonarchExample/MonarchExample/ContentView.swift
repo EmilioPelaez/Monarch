@@ -20,6 +20,10 @@ struct ContentView: View {
 	}
 }
 
+extension RequestDomain {
+	static let images = RequestDomain(rawValue: 1 << 1)
+}
+
 struct UsersRequest: Request {
 	var path: String { "users" }
 	var previewData: [User] = []

@@ -26,6 +26,13 @@ struct MonarchRequestModifier: ViewModifier {
 
 @available(iOS 15.0, *)
 public extension View {
+	/**
+	 Performs a request using the request provider found on the environment when
+	 the view appears.
+	 
+	 Any unhandled errors thrown by the provider will be reported using
+	 `HierarchyResponder`.
+	 */
 	func request(_ perform: @escaping (RequestProvider) async throws -> Void) -> some View {
 		modifier(MonarchRequestModifier(perform: perform))
 	}
