@@ -25,11 +25,8 @@ public protocol NetworkProvider: RequestProvider {
 	
 	/// Returns a URL from a given Request
 	func buildURL<R: Request>(for request: R) throws -> URL
-	/// From a given Request, returns a URLRequest that can be used by
-	/// URLSession to create a data task
-	func buildURLRequest<R: Request>(for request: R) throws -> URLRequest
-	/// Fetches the Data and a URLResponse for a given request
-	func fetch<R: Request>(for request: R) async throws -> (Data, URLResponse)
+	/// Configures a URLRequest using the information from a Request
+    func configureURLRequest<R: Request>(_ urlRequest: inout URLRequest, for request: R) throws
 	///	 Validates a (Data, URLResponse) pair
 	func validate(data: Data, response: URLResponse) throws
 }
@@ -55,23 +52,13 @@ public extension NetworkProvider {
 		return finalURL
 	}
 	
-	func buildURLRequest<R: Request>(for request: R) throws -> URLRequest {
-		let url = try buildURL(for: request)
-		var urlRequest = URLRequest(url: url)
-		urlRequest.httpMethod = request.method.string
-		if let body = request.body {
-			urlRequest.httpBody = body.data
-			urlRequest.addValue(body.contentType.description, forHTTPHeaderField: "Content-Type")
-		}
-		return urlRequest
-	}
-	
-	func fetch<R: Request>(for request: R) async throws -> (Data, URLResponse) {
-		let urlRequest = try buildURLRequest(for: request)
-		let (data, response) = try await session.data(for: urlRequest)
-		try validate(data: data, response: response)
-		return (data, response)
-	}
+    func configureURLRequest<R: Request>(_ urlRequest: inout URLRequest, for request: R) throws {
+        urlRequest.httpMethod = request.method.string
+        if let body = request.body {
+            urlRequest.httpBody = body.data
+            urlRequest.addValue(body.contentType.description, forHTTPHeaderField: "Content-Type")
+        }
+    }
 	
 	func validate(data: Data, response: URLResponse) throws {
 		if let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
@@ -82,6 +69,11 @@ public extension NetworkProvider {
 
 public extension NetworkProvider {
 	func perform<R>(_ request: R) async throws -> R.Response where R : Request {
-		try request.decode(try await fetch(for: request).0)
+		let url = try buildURL(for: request)
+        var urlRequest = URLRequest(url: url)
+        try configureURLRequest(&urlRequest, for: request)
+        let (data, response) = try await session.data(for: urlRequest)
+        try validate(data: data, response: response)
+        return try request.decode(data)
 	}
 }

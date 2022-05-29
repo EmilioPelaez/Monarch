@@ -10,18 +10,12 @@ import Monarch
 
 @main
 struct MonarchExampleApp: App {
+	let moviesClient = MoviesClient()
+	
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
-				.registerProvider(UserClient(), domain: .users)
+			MainScreen()
+				.registerProvider(moviesClient, domain: .movies)
 		}
 	}
-}
-
-class UserClient: NetworkProvider {
-	var baseURL = URL(string: "")!
-}
-
-extension RequestDomain {
-	static let users = RequestDomain(rawValue: 1 << 1)
 }

@@ -7,19 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCBE81682842BC4C002C5FE4 /* MoviesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE81672842BC4C002C5FE4 /* MoviesClient.swift */; };
+		BCBE816A2842BD6D002C5FE4 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE81692842BD6D002C5FE4 /* MainScreen.swift */; };
+		BCBE816D2842BEA8002C5FE4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE816C2842BEA8002C5FE4 /* Movie.swift */; };
+		BCBE816F2842BF4B002C5FE4 /* PopularMoviesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE816E2842BF4B002C5FE4 /* PopularMoviesRequest.swift */; };
+		BCBE81712842C0D4002C5FE4 /* MovieList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE81702842C0D4002C5FE4 /* MovieList.swift */; };
+		BCBE81762842C150002C5FE4 /* MovieRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE81752842C150002C5FE4 /* MovieRow.swift */; };
 		C8958B1E282A191B00341D09 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C8958B1D282A191B00341D09 /* Monarch */; };
 		C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8958B202831AEE700341D09 /* MemoryCache.swift */; };
 		C8D8E1D7282A187A002F62FD /* MonarchExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */; };
-		C8D8E1D9282A187A002F62FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8D8E1D8282A187A002F62FD /* ContentView.swift */; };
 		C8D8E1DB282A187C002F62FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D8E1DA282A187C002F62FD /* Assets.xcassets */; };
 		C8D8E1DE282A187C002F62FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D8E1DD282A187C002F62FD /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BCBE81672842BC4C002C5FE4 /* MoviesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesClient.swift; sourceTree = "<group>"; };
+		BCBE81692842BD6D002C5FE4 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		BCBE816C2842BEA8002C5FE4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		BCBE816E2842BF4B002C5FE4 /* PopularMoviesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesRequest.swift; sourceTree = "<group>"; };
+		BCBE81702842C0D4002C5FE4 /* MovieList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieList.swift; sourceTree = "<group>"; };
+		BCBE81752842C150002C5FE4 /* MovieRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRow.swift; sourceTree = "<group>"; };
 		C8958B202831AEE700341D09 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		C8D8E1D3282A187A002F62FD /* MonarchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonarchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonarchExampleApp.swift; sourceTree = "<group>"; };
-		C8D8E1D8282A187A002F62FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C8D8E1DA282A187C002F62FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C8D8E1DD282A187C002F62FD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C8D8E1E5282A188F002F62FD /* Monarch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Monarch; path = ..; sourceTree = "<group>"; };
@@ -37,6 +47,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BCBE81722842C0FE002C5FE4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BCBE81672842BC4C002C5FE4 /* MoviesClient.swift */,
+				BCBE816E2842BF4B002C5FE4 /* PopularMoviesRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BCBE81732842C10B002C5FE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BCBE816C2842BEA8002C5FE4 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BCBE81742842C119002C5FE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BCBE81702842C0D4002C5FE4 /* MovieList.swift */,
+				BCBE81752842C150002C5FE4 /* MovieRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C8958B1C282A191B00341D09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +97,7 @@
 				C8958B1C282A191B00341D09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		C8D8E1D4282A187A002F62FD /* Products */ = {
 			isa = PBXGroup;
@@ -74,7 +111,10 @@
 			isa = PBXGroup;
 			children = (
 				C8D8E1D6282A187A002F62FD /* MonarchExampleApp.swift */,
-				C8D8E1D8282A187A002F62FD /* ContentView.swift */,
+				BCBE81692842BD6D002C5FE4 /* MainScreen.swift */,
+				BCBE81742842C119002C5FE4 /* Views */,
+				BCBE81732842C10B002C5FE4 /* Model */,
+				BCBE81722842C0FE002C5FE4 /* Network */,
 				C8958B1F2831AED500341D09 /* Examples */,
 				C8D8E1DA282A187C002F62FD /* Assets.xcassets */,
 				C8D8E1DC282A187C002F62FD /* Preview Content */,
@@ -172,8 +212,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */,
-				C8D8E1D9282A187A002F62FD /* ContentView.swift in Sources */,
+				BCBE81762842C150002C5FE4 /* MovieRow.swift in Sources */,
+				BCBE816A2842BD6D002C5FE4 /* MainScreen.swift in Sources */,
+				BCBE816F2842BF4B002C5FE4 /* PopularMoviesRequest.swift in Sources */,
 				C8D8E1D7282A187A002F62FD /* MonarchExampleApp.swift in Sources */,
+				BCBE81682842BC4C002C5FE4 /* MoviesClient.swift in Sources */,
+				BCBE816D2842BEA8002C5FE4 /* Movie.swift in Sources */,
+				BCBE81712842C0D4002C5FE4 /* MovieList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
