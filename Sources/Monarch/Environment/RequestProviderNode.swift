@@ -21,6 +21,7 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 	
 	func perform<R>(_ request: R) async throws -> R.Response where R : Request {
 		do {
+            guard domain.contains(request.domain) else { throw UnhandledRequestError() }
 			let value = try await provider.perform(request)
 			handle(value, for: request)
 			return value

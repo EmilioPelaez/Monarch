@@ -19,5 +19,4 @@ class MemoryCache: CacheProvider {
 	func value<R>(for request: R) -> R.Response? where R : Request {
 		values[request.id] as? R.Response
 	}
-	
 }
