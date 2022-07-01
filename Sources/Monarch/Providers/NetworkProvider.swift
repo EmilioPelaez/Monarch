@@ -52,6 +52,17 @@ public extension NetworkProvider {
 		return finalURL
 	}
 	
+	func buildURLRequest<R: Request>(for request: R) throws -> URLRequest {
+		let url = try buildURL(for: request)
+		var urlRequest = URLRequest(url: url)
+		urlRequest.httpMethod = request.method.string
+		if let body = request.body {
+			urlRequest.httpBody = body.data
+			urlRequest.addValue(body.contentType.description, forHTTPHeaderField: "Content-Type")
+		}
+		return urlRequest
+	}
+	
     func configureURLRequest<R: Request>(_ urlRequest: inout URLRequest, for request: R) throws {
         urlRequest.httpMethod = request.method.string
         if let body = request.body {
@@ -68,7 +79,7 @@ public extension NetworkProvider {
 }
 
 public extension NetworkProvider {
-	func perform<R>(_ request: R) async throws -> R.Response where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
 		let url = try buildURL(for: request)
         var urlRequest = URLRequest(url: url)
         try configureURLRequest(&urlRequest, for: request)

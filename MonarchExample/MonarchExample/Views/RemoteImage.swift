@@ -21,13 +21,13 @@ struct RemoteImage<ImageRequest: Request, Content: View, Placeholder: View, Fail
 	@State var phase: RemoteImagePhase = .loading
 	
 	let request: ImageRequest
-	let decoder: (ImageRequest.Response) throws -> Image
+	let decoder: (ImageRequest.ResponseType) throws -> Image
 	let content: (Image) -> Content
 	let placeholder: () -> Placeholder
 	let failure: (Error) -> Failure
 	
 	private init(_ request: ImageRequest,
-		 decoder: @escaping (ImageRequest.Response) throws -> Image,
+		 decoder: @escaping (ImageRequest.ResponseType) throws -> Image,
 		 @ViewBuilder content: @escaping (Image) -> Content,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder,
 		 @ViewBuilder failure: @escaping (Error) -> Failure) {
@@ -66,7 +66,7 @@ extension RemoteImage {
 		 @ViewBuilder content: @escaping (Image) -> Content,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder,
 		 @ViewBuilder failure: @escaping (Error) -> Failure)
-	where ImageRequest.Response == Image {
+	where ImageRequest.ResponseType == Image {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = content
@@ -77,7 +77,7 @@ extension RemoteImage {
 	init(_ request: ImageRequest,
 		 @ViewBuilder content: @escaping (Image) -> Content,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.Response == Image, Failure == Placeholder {
+	where ImageRequest.ResponseType == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = content
@@ -87,7 +87,7 @@ extension RemoteImage {
 	
 	init(_ request: ImageRequest,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.Response == Image, Content == Image, Failure == Placeholder {
+	where ImageRequest.ResponseType == Image, Content == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = { $0.resizable() }
@@ -96,7 +96,7 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest)
-	where ImageRequest.Response == Image, Content == Image, Placeholder == Color, Failure == Placeholder {
+	where ImageRequest.ResponseType == Image, Content == Image, Placeholder == Color, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = { $0.resizable() }
@@ -108,7 +108,7 @@ extension RemoteImage {
 		 @ViewBuilder content: @escaping (Image) -> Content,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder,
 		 @ViewBuilder failure: @escaping (Error) -> Failure)
-	where ImageRequest.Response == Data {
+	where ImageRequest.ResponseType == Data {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -122,7 +122,7 @@ extension RemoteImage {
 	init(_ request: ImageRequest,
 		 @ViewBuilder content: @escaping (Image) -> Content,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.Response == Data, Failure == Placeholder {
+	where ImageRequest.ResponseType == Data, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -135,7 +135,7 @@ extension RemoteImage {
 	
 	init(_ request: ImageRequest,
 		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.Response == Data, Content == Image, Failure == Placeholder {
+	where ImageRequest.ResponseType == Data, Content == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -147,7 +147,7 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest)
-	where ImageRequest.Response == Data, Content == Image, Placeholder == Color, Failure == Placeholder {
+	where ImageRequest.ResponseType == Data, Content == Image, Placeholder == Color, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }

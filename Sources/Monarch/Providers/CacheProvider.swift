@@ -10,18 +10,18 @@ import Foundation
  */
 public protocol CacheProvider: ResponseHandler {
 	/// Stores the value for a given request.
-	func store<R: Request>(_ value: R.Response, for request: R)
+	func store<R: Request>(_ value: R.ResponseType, for request: R)
 	/// Attempts to stored value for a given request.
-	func value<R: Request>(for request: R) async -> R.Response?
+	func value<R: Request>(for request: R) async -> R.ResponseType?
 }
 
 public extension CacheProvider {
-	func perform<R>(_ request: R) async throws -> R.Response where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
 		guard let value = await value(for: request) else { throw UnhandledRequestError() }
 		return value
 	}
 	
-	func handle<R>(_ response: R.Response, for request: R) where R : Request {
+	func handle<R>(_ response: R.ResponseType, for request: R) where R : Request {
 		store(response, for: request)
 	}
 }
