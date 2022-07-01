@@ -36,7 +36,7 @@ public protocol Request {
 	var query: [String: Any] { get }
 	
 	/// A response sample used by SwiftUI previews.
-	var previewData: ResponseType { get }
+	var preview: ResponseType { get }
 	
 	/// Returns a value of the type `ResponseType` from a `Data` object.
 	/// For `Decodable` responses, it uses a `JSONDecoder` by default.

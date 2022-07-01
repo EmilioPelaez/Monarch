@@ -11,7 +11,7 @@ import Monarch
 struct PopularMoviesRequest: Request {
 	var domain: RequestDomain { .movies }
 	var path: String { "movie/popular" }
-	var previewData: [Movie] = Array(repeating: .example, count: 20)
+	var preview: [Movie] = Array(repeating: .example, count: 20)
 	
 	static let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()

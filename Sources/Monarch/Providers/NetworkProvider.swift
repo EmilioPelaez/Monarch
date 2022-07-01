@@ -23,12 +23,17 @@ public protocol NetworkProvider: RequestProvider {
 	/// The URLSession to create the URL Data Task. `default` by default.
 	var session: URLSession { get }
 	
-	/// Returns a URL from a given Request
+	/// Returns a URL from a given Request. Default implementation provided.
 	func buildURL<R: Request>(for request: R) throws -> URL
-	/// Configures a URLRequest using the information from a Request
-    func configureURLRequest<R: Request>(_ urlRequest: inout URLRequest, for request: R) throws
-	///	 Validates a (Data, URLResponse) pair
+	/// Builds a URLRequest using the information from a Request. Default implementation provided.
+	func buildURLRequest<R: Request>(with url: URL, for request: R) throws -> URLRequest
+	/// Validates a (Data, URLResponse) pair. Default implementation provided.
 	func validate(data: Data, response: URLResponse) throws
+	
+	///	Customization point for the final URL.
+	func configureURL(_ url: inout URL) throws
+	///	Customization point for the final URLRequest
+	func configureURLRequest(_ urlRequest: inout URLRequest) throws
 }
 
 public extension NetworkProvider {
@@ -52,8 +57,9 @@ public extension NetworkProvider {
 		return finalURL
 	}
 	
-	func buildURLRequest<R: Request>(for request: R) throws -> URLRequest {
-		let url = try buildURL(for: request)
+	func configureURL(_ url: inout URL) throws {}
+	
+	func buildURLRequest<R: Request>(with url: URL, for request: R) throws -> URLRequest {
 		var urlRequest = URLRequest(url: url)
 		urlRequest.httpMethod = request.method.string
 		if let body = request.body {
@@ -63,13 +69,7 @@ public extension NetworkProvider {
 		return urlRequest
 	}
 	
-    func configureURLRequest<R: Request>(_ urlRequest: inout URLRequest, for request: R) throws {
-        urlRequest.httpMethod = request.method.string
-        if let body = request.body {
-            urlRequest.httpBody = body.data
-            urlRequest.addValue(body.contentType.description, forHTTPHeaderField: "Content-Type")
-        }
-    }
+	func configureURLRequest(_ urlRequest: inout URLRequest) throws {}
 	
 	func validate(data: Data, response: URLResponse) throws {
 		if let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
@@ -80,11 +80,12 @@ public extension NetworkProvider {
 
 public extension NetworkProvider {
 	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
-		let url = try buildURL(for: request)
-        var urlRequest = URLRequest(url: url)
-        try configureURLRequest(&urlRequest, for: request)
-        let (data, response) = try await session.data(for: urlRequest)
-        try validate(data: data, response: response)
-        return try request.decode(data)
+		var url = try buildURL(for: request)
+		try configureURL(&url)
+		var urlRequest = try buildURLRequest(with: url, for: request)
+		try configureURLRequest(&urlRequest)
+		let (data, response) = try await session.data(for: urlRequest)
+		try validate(data: data, response: response)
+		return try request.decode(data)
 	}
 }

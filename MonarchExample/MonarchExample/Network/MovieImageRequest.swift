@@ -13,7 +13,7 @@ struct MovieImageRequest: Request {
 	
 	var domain: RequestDomain { .images }
 	let path: String
-	var previewData = Image("Poster")
+	var preview = Image("Poster")
 	
 	func decode(_ data: Data) throws -> Image {
 		guard let image = Image(data: data) else {
