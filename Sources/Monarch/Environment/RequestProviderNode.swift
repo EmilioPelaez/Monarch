@@ -23,7 +23,7 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 		do {
             guard domain.contains(request.domain) else { throw UnhandledRequestError() }
 			let value = try await provider.perform(request)
-			handle(value, for: request)
+			previous?.handle(value, for: request)
 			return value
 		} catch is UnhandledRequestError {
 			guard let next = next else { throw UnhandledRequestError() }
