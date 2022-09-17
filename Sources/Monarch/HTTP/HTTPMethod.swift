@@ -20,7 +20,7 @@ public enum HTTPMethod {
 		case .PUT: return "PUT"
 		case .PATCH: return "PATCH"
 		case .DELETE: return "DELETE"
-		case .custom(let method): return method
+		case let .custom(method): return method
 		}
 	}
 }

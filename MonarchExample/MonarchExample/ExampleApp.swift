@@ -5,8 +5,8 @@
 //  Created by Emilio Peláez on 09/05/22.
 //
 
-import SwiftUI
 import Monarch
+import SwiftUI
 
 @main
 struct ExampleApp: App {

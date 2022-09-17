@@ -67,6 +67,7 @@ public extension Request where ResponseType == PackedType {
 	func pack(_ response: ResponseType) -> PackedType? {
 		response
 	}
+
 	func unpack(_ packed: PackedType) -> ResponseType? {
 		packed
 	}
@@ -76,6 +77,7 @@ public extension Request where ResponseType: Codable, PackedType == Data {
 	func pack(_ response: ResponseType) -> PackedType? {
 		try? JSONEncoder().encode(response)
 	}
+
 	func unpack(_ packed: PackedType) -> ResponseType? {
 		try? JSONDecoder().decode(ResponseType.self, from: packed)
 	}

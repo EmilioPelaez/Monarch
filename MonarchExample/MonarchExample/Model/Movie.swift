@@ -15,8 +15,8 @@ struct Movie: Codable, Identifiable {
 	let voteAverage: Double
 	
 	static let example = Movie(id: 0,
-							   posterPath: "demo",
-							   releaseDate: .now,
-							   title: "Spider-Man: No Way Home",
-							   voteAverage: 9.5)
+	                           posterPath: "demo",
+	                           releaseDate: .now,
+	                           title: "Spider-Man: No Way Home",
+	                           voteAverage: 9.5)
 }

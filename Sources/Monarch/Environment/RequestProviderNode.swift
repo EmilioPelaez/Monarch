@@ -19,9 +19,9 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 		next?.previous = self
 	}
 	
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		do {
-            guard domain.contains(request.domain) else { throw UnhandledRequestError() }
+			guard domain.contains(request.domain) else { throw UnhandledRequestError() }
 			let value = try await provider.perform(request)
 			previous?.handle(value, for: request)
 			return value
@@ -33,7 +33,7 @@ class RequestProviderNode: RequestProvider, ResponseHandler {
 		}
 	}
 	
-	func handle<R>(_ response: R.ResponseType, for request: R) where R : Request {
+	func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
 		if let handler = provider as? ResponseHandler {
 			handler.handle(response, for: request)
 		}

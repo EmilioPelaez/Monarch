@@ -5,8 +5,8 @@
 //  Created by Emilio Peláez on 29/05/22.
 //
 
-import SwiftUI
 import Monarch
+import SwiftUI
 
 enum RemoteImagePhase {
 	case loading
@@ -27,10 +27,10 @@ struct RemoteImage<ImageRequest: Request, Content: View, Placeholder: View, Fail
 	let failure: (Error) -> Failure
 	
 	private init(_ request: ImageRequest,
-		 decoder: @escaping (ImageRequest.ResponseType) throws -> Image,
-		 @ViewBuilder content: @escaping (Image) -> Content,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder,
-		 @ViewBuilder failure: @escaping (Error) -> Failure) {
+	             decoder: @escaping (ImageRequest.ResponseType) throws -> Image,
+	             @ViewBuilder content: @escaping (Image) -> Content,
+	             @ViewBuilder placeholder: @escaping () -> Placeholder,
+	             @ViewBuilder failure: @escaping (Error) -> Failure) {
 		self.request = request
 		self.decoder = decoder
 		self.content = content
@@ -43,9 +43,9 @@ struct RemoteImage<ImageRequest: Request, Content: View, Placeholder: View, Fail
 			switch phase {
 			case .loading:
 				placeholder()
-			case .loaded(let image):
+			case let .loaded(image):
 				content(image)
-			case .failed(let error):
+			case let .failed(error):
 				failure(error)
 			}
 		}
@@ -63,10 +63,10 @@ struct RemoteImage<ImageRequest: Request, Content: View, Placeholder: View, Fail
 
 extension RemoteImage {
 	init(_ request: ImageRequest,
-		 @ViewBuilder content: @escaping (Image) -> Content,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder,
-		 @ViewBuilder failure: @escaping (Error) -> Failure)
-	where ImageRequest.ResponseType == Image {
+	     @ViewBuilder content: @escaping (Image) -> Content,
+	     @ViewBuilder placeholder: @escaping () -> Placeholder,
+	     @ViewBuilder failure: @escaping (Error) -> Failure)
+		where ImageRequest.ResponseType == Image {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = content
@@ -75,9 +75,9 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest,
-		 @ViewBuilder content: @escaping (Image) -> Content,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.ResponseType == Image, Failure == Placeholder {
+	     @ViewBuilder content: @escaping (Image) -> Content,
+	     @ViewBuilder placeholder: @escaping () -> Placeholder)
+		where ImageRequest.ResponseType == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = content
@@ -86,8 +86,8 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.ResponseType == Image, Content == Image, Failure == Placeholder {
+	     @ViewBuilder placeholder: @escaping () -> Placeholder)
+		where ImageRequest.ResponseType == Image, Content == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = { $0.resizable() }
@@ -96,7 +96,7 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest)
-	where ImageRequest.ResponseType == Image, Content == Image, Placeholder == Color, Failure == Placeholder {
+		where ImageRequest.ResponseType == Image, Content == Image, Placeholder == Color, Failure == Placeholder {
 		self.request = request
 		self.decoder = { $0 }
 		self.content = { $0.resizable() }
@@ -105,10 +105,10 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest,
-		 @ViewBuilder content: @escaping (Image) -> Content,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder,
-		 @ViewBuilder failure: @escaping (Error) -> Failure)
-	where ImageRequest.ResponseType == Data {
+	     @ViewBuilder content: @escaping (Image) -> Content,
+	     @ViewBuilder placeholder: @escaping () -> Placeholder,
+	     @ViewBuilder failure: @escaping (Error) -> Failure)
+		where ImageRequest.ResponseType == Data {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -120,9 +120,9 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest,
-		 @ViewBuilder content: @escaping (Image) -> Content,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.ResponseType == Data, Failure == Placeholder {
+	     @ViewBuilder content: @escaping (Image) -> Content,
+	     @ViewBuilder placeholder: @escaping () -> Placeholder)
+		where ImageRequest.ResponseType == Data, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -134,8 +134,8 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest,
-		 @ViewBuilder placeholder: @escaping () -> Placeholder)
-	where ImageRequest.ResponseType == Data, Content == Image, Failure == Placeholder {
+	     @ViewBuilder placeholder: @escaping () -> Placeholder)
+		where ImageRequest.ResponseType == Data, Content == Image, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }
@@ -147,7 +147,7 @@ extension RemoteImage {
 	}
 	
 	init(_ request: ImageRequest)
-	where ImageRequest.ResponseType == Data, Content == Image, Placeholder == Color, Failure == Placeholder {
+		where ImageRequest.ResponseType == Data, Content == Image, Placeholder == Color, Failure == Placeholder {
 		self.request = request
 		self.decoder = {
 			guard let image = Image(data: $0) else { throw ImageDecodeError() }

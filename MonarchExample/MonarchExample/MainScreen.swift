@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct MainScreen: View {
-    var body: some View {
+	var body: some View {
 		NavigationView {
 			MovieList()
 				.navigationTitle("Popular Movies")
 		}
-    }
+	}
 }
 
 struct MainScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        MainScreen()
-    }
+	static var previews: some View {
+		MainScreen()
+	}
 }

@@ -11,5 +11,5 @@ public struct UnhandledRequestError: Error {
 
 /// Thrown when a `NetworkProvider` is unable to build a `URL`.
 public struct URLBuilderError: Error {
-    public init() {}
+	public init() {}
 }

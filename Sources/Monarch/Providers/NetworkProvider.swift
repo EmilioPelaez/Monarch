@@ -57,7 +57,7 @@ public extension NetworkProvider {
 		return finalURL
 	}
 	
-	func configureURL(_ url: inout URL) throws {}
+	func configureURL(_: inout URL) throws {}
 	
 	func buildURLRequest<R: Request>(with url: URL, for request: R) throws -> URLRequest {
 		var urlRequest = URLRequest(url: url)
@@ -69,17 +69,17 @@ public extension NetworkProvider {
 		return urlRequest
 	}
 	
-	func configureURLRequest(_ urlRequest: inout URLRequest) throws {}
+	func configureURLRequest(_: inout URLRequest) throws {}
 	
-	func validate(data: Data, response: URLResponse) throws {
-		if let response = response as? HTTPURLResponse, !(200..<300).contains(response.statusCode) {
+	func validate(data _: Data, response: URLResponse) throws {
+		if let response = response as? HTTPURLResponse, !(200 ..< 300).contains(response.statusCode) {
 			throw HTTPError(code: response.statusCode)
 		}
 	}
 }
 
 public extension NetworkProvider {
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		var url = try buildURL(for: request)
 		try configureURL(&url)
 		var urlRequest = try buildURLRequest(with: url, for: request)

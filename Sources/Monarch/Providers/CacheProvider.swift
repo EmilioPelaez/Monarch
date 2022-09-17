@@ -16,12 +16,12 @@ public protocol CacheProvider: ResponseHandler {
 }
 
 public extension CacheProvider {
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		guard let value = await value(for: request) else { throw UnhandledRequestError() }
 		return value
 	}
 	
-	func handle<R>(_ response: R.ResponseType, for request: R) where R : Request {
+	func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
 		store(response, for: request)
 	}
 }

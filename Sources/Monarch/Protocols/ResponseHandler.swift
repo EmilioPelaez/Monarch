@@ -10,5 +10,5 @@ import Foundation
  */
 public protocol ResponseHandler: RequestProvider {
 	/// Handle a response for a given request
-	func handle<R:Request>(_ response: R.ResponseType, for request: R)
+	func handle<R: Request>(_ response: R.ResponseType, for request: R)
 }

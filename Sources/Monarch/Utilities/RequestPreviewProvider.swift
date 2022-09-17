@@ -5,7 +5,7 @@
 import Foundation
 
 class RequestPreviewProvider: RequestProvider {
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		request.preview
 	}
 }

@@ -12,11 +12,11 @@ import Monarch
 class MemoryCache: CacheProvider {
 	var values: [String: Any] = [:]
 	
-	func store<R>(_ value: R.ResponseType, for request: R) where R : Request {
+	func store<R>(_ value: R.ResponseType, for request: R) where R: Request {
 		values[request.id] = value
 	}
 	
-	func value<R>(for request: R) -> R.ResponseType? where R : Request {
+	func value<R>(for request: R) -> R.ResponseType? where R: Request {
 		values[request.id] as? R.ResponseType
 	}
 }

@@ -1,5 +1,5 @@
-import XCTest
 @testable import Monarch
+import XCTest
 
 final class MonarchTests: XCTestCase {
 	func testExample() throws {

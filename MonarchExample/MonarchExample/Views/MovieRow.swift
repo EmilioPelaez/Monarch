@@ -16,9 +16,9 @@ struct MovieRow: View {
 	
 	var badgeColor: Color {
 		switch movie.voteAverage {
-		case 0..<5: return .red
-		case 5..<7: return .orange
-		case 7..<9: return .yellow
+		case 0 ..< 5: return .red
+		case 5 ..< 7: return .orange
+		case 7 ..< 9: return .yellow
 		case _: return .green
 		}
 	}

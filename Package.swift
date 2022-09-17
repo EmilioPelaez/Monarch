@@ -9,15 +9,18 @@ let package = Package(
 	products: [
 		.library(
 			name: "Monarch",
-			targets: ["Monarch"]),
+			targets: ["Monarch"]
+		),
 	],
 	dependencies: [.package(url: "https://github.com/EmilioPelaez/HierarchyResponder", from: Version(1, 0, 0))],
 	targets: [
 		.target(
 			name: "Monarch",
-			dependencies: ["HierarchyResponder"]),
+			dependencies: ["HierarchyResponder"]
+		),
 		.testTarget(
 			name: "MonarchTests",
-			dependencies: ["Monarch"]),
+			dependencies: ["Monarch"]
+		),
 	]
 )

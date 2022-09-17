@@ -24,10 +24,10 @@ public struct HTTPBody {
 	public let data: Data
 }
 
-extension HTTPBody {
+public extension HTTPBody {
 	/// Creates an instance with a content type of `textPlain` and a body of the
 	/// encoded text.
-	public init(text: String, encoding: String.Encoding = .utf8, allowLossyConversion: Bool = false) throws {
+	init(text: String, encoding: String.Encoding = .utf8, allowLossyConversion: Bool = false) throws {
 		guard let data = text.data(using: encoding, allowLossyConversion: allowLossyConversion) else {
 			throw StringEncodingError()
 		}
@@ -37,14 +37,14 @@ extension HTTPBody {
 	
 	/// Creates an instance with a content type of `applicationJson` and a body of
 	/// the encoded object
-	public init<T: Encodable>(_ object: T, encoder: JSONEncoder = .init()) throws {
+	init<T: Encodable>(_ object: T, encoder: JSONEncoder = .init()) throws {
 		self.contentType = .applicationJson
 		self.data = try encoder.encode(object)
 	}
 	
 	/// Creates an instance with a content type of `applicationJson` and a body of
 	/// the serialized json object
-	public init(json: Any) throws {
+	init(json: Any) throws {
 		self.contentType = .applicationJson
 		self.data = try JSONSerialization.data(withJSONObject: json, options: [])
 	}
@@ -55,7 +55,7 @@ extension HTTPBody.ContentType: CustomStringConvertible {
 		switch self {
 		case .textPlain: return "text/plain"
 		case .applicationJson: return "application/json"
-		case .custom(let string): return string
+		case let .custom(string): return string
 		}
 	}
 }
