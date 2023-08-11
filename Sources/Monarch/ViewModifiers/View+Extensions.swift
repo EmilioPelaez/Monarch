@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, watchOS 8.0, *)
 public extension View {
 	/**
 	 Registers a request provider in the view hierarchy.

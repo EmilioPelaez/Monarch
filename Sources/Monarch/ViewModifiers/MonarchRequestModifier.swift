@@ -5,7 +5,7 @@
 import HierarchyResponder
 import SwiftUI
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, watchOS 8.0, *)
 struct MonarchRequestModifier: ViewModifier {
 	@Environment(\.monarch) var monarch
 	@Environment(\.reportError) var reportError
