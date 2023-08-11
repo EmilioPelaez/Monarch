@@ -5,14 +5,14 @@
 import SwiftUI
 
 struct RegisterProviderModifier: ViewModifier {
-	@Environment(\.providerNode) var providerNode: RequestProviderNode
+	@Environment(\.monarch) var monarch: Monarch
 	
 	let provider: RequestProvider
 	let domain: RequestDomain
 	
 	func body(content: Content) -> some View {
 		content
-			.environment(\.providerNode, RequestProviderNode(provider, domain: domain, next: providerNode))
+			.environment(\.monarch, Monarch(provider, domain: domain, next: monarch.node))
 	}
 	
 }
