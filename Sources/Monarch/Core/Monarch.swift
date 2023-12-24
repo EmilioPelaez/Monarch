@@ -8,21 +8,22 @@ import Foundation
  Monarch handles requests using a [Responder Chain](link).
  Monarch objects are create
  */
-open class Monarch: RequestProvider, ResponseHandler {
+public struct Monarch: RequestProvider, ResponseHandler {
 	let node: Node
 	
 	public var providers: [RequestProvider] {
 		sequence(first: node, next: \.next)
 			.lazy
-			.compactMap { $0 }.map(\.provider)
+			.compactMap { $0 }
+			.map(\.provider)
 			.filter { !($0 is EmptyRequestProvider) }
 	}
 	
-	public convenience init() {
+	public init() {
 		self.init(EmptyRequestProvider())
 	}
 	
-	open func appending(_ provider: RequestProvider, domain: RequestDomain = .any) -> Monarch {
+	public func appending(_ provider: RequestProvider, domain: RequestDomain = .any) -> Monarch {
 		let next = Node(provider, domain: domain)
 		return Monarch(node.provider, domain: node.domain, next: next)
 	}
@@ -31,11 +32,11 @@ open class Monarch: RequestProvider, ResponseHandler {
 		self.node = .init(provider, domain: domain, next: next)
 	}
 	
-	open func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
+	public func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		try await node.perform(request)
 	}
 	
-	open func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
+	public func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
 		node.handle(response, for: request)
 	}
 }

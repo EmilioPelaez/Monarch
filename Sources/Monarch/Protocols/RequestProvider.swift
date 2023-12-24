@@ -11,7 +11,7 @@ import Foundation
  Providers are registered on the view hierarchy using the `.registerProvider()`
  view modifier.
  */
-public protocol RequestProvider: AnyObject {
+public protocol RequestProvider {
 	/**
 	 Receives a generic requests and returns a value of the type `R.ResponseType`.
 	 
