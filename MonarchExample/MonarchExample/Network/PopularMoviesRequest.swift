@@ -8,7 +8,7 @@
 import Foundation
 import Monarch
 
-struct PopularMoviesRequest: Request {
+struct PopularMoviesRequest: RemoteRequest {
 	var domain: RequestDomain { .movies }
 	var path: String { "movie/popular" }
 	var preview: [Movie] = Array(repeating: .example, count: 20)

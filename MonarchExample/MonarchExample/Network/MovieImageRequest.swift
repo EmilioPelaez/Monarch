@@ -8,7 +8,7 @@
 import Monarch
 import SwiftUI
 
-struct MovieImageRequest: Request {
+struct MovieImageRequest: RemoteRequest {
 	struct ImageDecodeError: Error {}
 	
 	var domain: RequestDomain { .images }
