@@ -12,7 +12,7 @@ struct RegisterProviderModifier: ViewModifier {
 	
 	func body(content: Content) -> some View {
 		content
-			.environment(\.monarch, Monarch(provider, domain: domain, next: monarch.node))
+			.environment(\.monarch, Monarch(provider, domain: domain, next: monarch))
 	}
 	
 }
