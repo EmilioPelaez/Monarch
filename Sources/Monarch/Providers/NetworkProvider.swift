@@ -24,9 +24,9 @@ public protocol NetworkProvider: RequestProvider {
 	var session: URLSession { get }
 	
 	/// Returns a URL from a given Request. Default implementation provided.
-	func buildURL<R: Request>(for request: R) throws -> URL
+	func buildURL<R: RemoteRequest>(for request: R) throws -> URL
 	/// Builds a URLRequest using the information from a Request. Default implementation provided.
-	func buildURLRequest<R: Request>(with url: URL, for request: R) throws -> URLRequest
+	func buildURLRequest<R: RemoteRequest>(with url: URL, for request: R) throws -> URLRequest
 	/// Validates a (Data, URLResponse) pair. Default implementation provided.
 	func validate(data: Data, response: URLResponse) throws
 	
@@ -41,7 +41,7 @@ public extension NetworkProvider {
 }
 
 public extension NetworkProvider {
-	func buildURL<R: Request>(for request: R) throws -> URL {
+	func buildURL<R: RemoteRequest>(for request: R) throws -> URL {
 		let url = baseURL.appendingPathComponent(request.path)
 		guard !request.query.isEmpty else {
 			return url
@@ -59,7 +59,7 @@ public extension NetworkProvider {
 	
 	func configureURL(_: inout URL) throws {}
 	
-	func buildURLRequest<R: Request>(with url: URL, for request: R) throws -> URLRequest {
+	func buildURLRequest<R: RemoteRequest>(with url: URL, for request: R) throws -> URLRequest {
 		var urlRequest = URLRequest(url: url)
 		urlRequest.httpMethod = request.method.string
 		if let body = request.body {
@@ -79,13 +79,17 @@ public extension NetworkProvider {
 }
 
 public extension NetworkProvider {
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
+	func perform<R: Request>(_ request: R) async throws -> R.ResponseType {
+		guard let request = request as? any RemoteRequest else { throw UnhandledRequestError() }
 		var url = try buildURL(for: request)
 		try configureURL(&url)
 		var urlRequest = try buildURLRequest(with: url, for: request)
 		try configureURLRequest(&urlRequest)
 		let (data, response) = try await session.data(for: urlRequest)
 		try validate(data: data, response: response)
-		return try request.decode(data)
+		guard let response = try request.decode(data) as? R.ResponseType else {
+			fatalError()
+		}
+		return response
 	}
 }
