@@ -20,6 +20,9 @@ struct MovieList: View {
 		.request {
 			movies = try await $0.perform(PopularMoviesRequest())
 		}
+		.handleError { error in
+			print("Unable to fetch movie list", error)
+		}
 	}
 }
 

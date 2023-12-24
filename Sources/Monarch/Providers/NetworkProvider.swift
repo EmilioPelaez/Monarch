@@ -80,7 +80,7 @@ public extension NetworkProvider {
 
 public extension NetworkProvider {
 	func perform<R: Request>(_ request: R) async throws -> R.ResponseType {
-		guard let request = request as? any RemoteRequest else { throw UnhandledRequestError() }
+		guard let request = request as? any RemoteRequest else { throw UnhandledRequestError(request) }
 		var url = try buildURL(for: request)
 		try configureURL(&url)
 		var urlRequest = try buildURLRequest(with: url, for: request)

@@ -43,12 +43,12 @@ public class Monarch: RequestProvider, ResponseHandler {
 	
 	public func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		do {
-			guard domain.contains(request.domain) else { throw UnhandledRequestError() }
+			guard domain.contains(request.domain) else { throw UnhandledRequestError(request) }
 			let value = try await provider.perform(request)
 			previous?.handle(value, for: request)
 			return value
 		} catch is UnhandledRequestError {
-			guard let next = next else { throw UnhandledRequestError() }
+			guard let next = next else { throw UnhandledRequestError(request) }
 			return try await next.perform(request)
 		} catch {
 			throw error

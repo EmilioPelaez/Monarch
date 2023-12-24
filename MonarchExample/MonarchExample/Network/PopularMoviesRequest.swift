@@ -11,7 +11,7 @@ import Monarch
 struct PopularMoviesRequest: RemoteRequest {
 	var domain: RequestDomain { .movies }
 	var path: String { "movie/popular" }
-	var preview: [Movie] = Array(repeating: .example, count: 20)
+	var preview: [Movie] = Array(repeating: .example, count: 1)
 	
 	static let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
