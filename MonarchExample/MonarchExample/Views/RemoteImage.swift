@@ -49,7 +49,7 @@ struct RemoteImage<ImageRequest: Request, Content: View, Placeholder: View, Fail
 				failure(error)
 			}
 		}
-		.request {
+		.request(id: request.id) {
 			do {
 				let response = try await $0.perform(request)
 				let image = try decoder(response)

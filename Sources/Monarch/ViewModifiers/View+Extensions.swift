@@ -27,7 +27,18 @@ public extension View {
 	 Any unhandled errors thrown by the provider will be reported using
 	 `HierarchyResponder`.
 	 */
-	func request(_ perform: @escaping (RequestProvider) async throws -> Void) -> some View {
-		modifier(MonarchRequestModifier(perform: perform))
+	func request<T: Equatable>(id: T, priority: TaskPriority = .userInitiated, perform: @escaping (Monarch) async throws -> Void) -> some View {
+		modifier(MonarchRequestModifier(id: id, priority: priority, perform: perform))
+	}
+	
+	/**
+	 Performs a request using the request provider found on the environment when
+	 the view appears.
+	 
+	 Any unhandled errors thrown by the provider will be reported using
+	 `HierarchyResponder`.
+	 */
+	func request(priority: TaskPriority = .userInitiated, perform: @escaping (Monarch) async throws -> Void) -> some View {
+		modifier(MonarchRequestModifier(id: 0, priority: priority, perform: perform))
 	}
 }
