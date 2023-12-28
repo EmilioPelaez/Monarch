@@ -4,34 +4,52 @@
 
 import Foundation
 
-/***
- Monarch handles requests using a [Responder Chain](link).
- Monarch objects are create
+/**
+ A `Monarch` object represents the first node in a monarch [Responder Chain](link).
+ 
+ When a `Request` is supplied using the `perform` method, the `provider` in the
+ `Monarch` node will attempt to handle the request and return a response. If
+ the `provider` is not able to handle that response, the request will be sent
+ to the `next` node on the chain.
+ 
+ If the `Request` reaches the end of the chain without being handled, an
+ `UnhandledRequestError` will be thrown.
+ 
+ Once a `RequestProvider` has produced a response, the `handle` method will be
+ called on the same `Monarch` node that produced the response, and then on all
+ the nodes the request passed through, in the reverse order.
  */
 public class Monarch: RequestProvider, ResponseHandler {
-	let provider: RequestProvider
-	let domain: RequestDomain
+	/**
+	 The `provider` is the object that encapsulates the logic of how to handle a
+	 specific kind of Request
+	 */
+	public let provider: RequestProvider
+	/**
+	 A `domain` acts as a filter to determine whether or not an attempt should be
+	 made to handle a request
+	 */
+	public let domain: RequestDomain
 	
+	/**
+	 The node that will attempt to handle the request if the current node is not
+	 able to.
+	 */
 	let next: Monarch?
 	private(set) weak var previous: Monarch?
 	
-	public var providers: [RequestProvider] {
+	/**
+	 A list of all the nodes in the current responder chain in the order they will
+	 receive a response supplied to this node
+	 */
+	public var nodes: [Monarch] {
 		sequence(first: self, next: \.next)
 			.lazy
 			.compactMap { $0 }
-			.map(\.provider)
-			.filter { !($0 is EmptyRequestProvider) }
+			.filter { !($0.provider is EmptyRequestProvider) }
 	}
 	
-	public convenience init() {
-		self.init(EmptyRequestProvider())
-	}
-	
-	public func appending(_ provider: RequestProvider, domain: RequestDomain = .any) -> Monarch {
-		return Monarch(provider, domain: domain, next: self)
-	}
-	
-	init(_ provider: RequestProvider = EmptyRequestProvider(),
+	init(_ provider: RequestProvider,
 			 domain: RequestDomain = .any,
 			 next: Monarch? = nil) {
 		self.provider = provider
@@ -60,5 +78,11 @@ public class Monarch: RequestProvider, ResponseHandler {
 			handler.handle(response, for: request)
 		}
 		previous?.handle(response, for: request)
+	}
+}
+
+extension Monarch: CustomStringConvertible {
+	public var description: String {
+		"Monarch Node, domain: \(String(describing: domain)), provider: \(String(describing: provider))"
 	}
 }

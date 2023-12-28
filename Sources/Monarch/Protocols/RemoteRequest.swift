@@ -4,6 +4,10 @@
 
 import Foundation
 
+/**
+ A protocol defining the requirements for a network request designed to be
+ consumed by a `NetworkProvider`
+ */
 public protocol RemoteRequest: Request {
 	/// The path on the server where this resource will be found.
 	var path: String { get }

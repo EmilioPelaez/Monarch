@@ -5,8 +5,7 @@
 import Foundation
 
 /**
- Response handlers receive the response for a request, along with the request,
- and can do anything they want with it, like logging it or caching it.
+ Response handlers receive the response for a request, along with the request.
  */
 public protocol ResponseHandler: RequestProvider {
 	/// Handle a response for a given request

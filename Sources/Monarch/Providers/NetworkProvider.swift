@@ -30,9 +30,9 @@ public protocol NetworkProvider: RequestProvider {
 	/// Validates a (Data, URLResponse) pair. Default implementation provided.
 	func validate(data: Data, response: URLResponse) throws
 	
-	///	Customization point for the final URL.
+	/// Customization point for the final URL.
 	func configureURL(_ url: inout URL) throws
-	///	Customization point for the final URLRequest
+	/// Customization point for the final URLRequest
 	func configureURLRequest(_ urlRequest: inout URLRequest) throws
 }
 

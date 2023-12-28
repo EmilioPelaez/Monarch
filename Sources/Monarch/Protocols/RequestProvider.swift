@@ -7,16 +7,13 @@ import Foundation
 /**
  Request providers receive a request and must return a response of the
  `R.ResponseType` type.
- 
- Providers are registered on the view hierarchy using the `.registerProvider()`
- view modifier.
  */
 public protocol RequestProvider {
 	/**
-	 Receives a generic requests and returns a value of the type `R.ResponseType`.
+	 Receives a generic request and returns a value of the type `R.ResponseType`.
 	 
-	 If the response cannot be handled, an `UnhandledRequestError`
-	 should be thrown.
+	 - Throws: `UnhandledRequestError` when the response can't be handled by this
+	 provider
 	 */
 	func perform<R: Request>(_ request: R) async throws -> R.ResponseType
 }

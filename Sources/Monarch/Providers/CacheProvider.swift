@@ -5,8 +5,7 @@
 import Foundation
 
 /**
- Cache providers can use the `pack` and `unpack` methods of a `Request` to
- convert the response value into an object that can be stored more easily.
+ WIP
  */
 public protocol CacheProvider: ResponseHandler {
 	/// Stores the value for a given request.

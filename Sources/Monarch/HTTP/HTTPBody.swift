@@ -11,16 +11,16 @@ import Foundation
 public struct HTTPBody {
 	public struct StringEncodingError: Error {}
 	
-	///	The HTTP content type of the body
+	/// The HTTP content type of the body
 	public enum ContentType {
 		case textPlain
 		case applicationJson
 		case custom(String)
 	}
 	
-	///	The HTTP content type of the body
+	/// The HTTP content type of the body
 	public let contentType: ContentType
-	///	The body represented as `Data`
+	/// The body represented as `Data`
 	public let data: Data
 }
 

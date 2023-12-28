@@ -5,19 +5,20 @@
 import Foundation
 
 /**
- A protocol defining the requirements for a network request.
+ A protocol defining the requirements for a Monarch request.
  
  Only two properties are strictly required when defining a request:
- `path` and `previewData`. For example:
+ `id` and `previewData`. For example:
  
  ```
  struct UsersRequest: Request {
-	 var path: String { "users" }
+	 var id: String { "users" }
 	 var previewData: [User] = []
  }
  ```
  */
 public protocol Request {
+	/// The type of the response expected from this request
 	associatedtype ResponseType
 	
 	/// A unique identifier for the request.

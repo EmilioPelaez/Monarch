@@ -6,8 +6,8 @@ import SwiftUI
 
 public extension EnvironmentValues {
 	/**
-	 An environment value that provides access to the first `RequestProvider` in
-	 the responder chain.
+	 An environment value that provides access to the first `Monarch` node in the
+	 responder chain.
 	 */
 	var monarch: Monarch {
 		get { self[MonarchKey.self] }
