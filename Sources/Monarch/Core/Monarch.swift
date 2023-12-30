@@ -46,10 +46,13 @@ public class Monarch: RequestProvider, ResponseHandler {
 		sequence(first: self, next: \.next)
 			.lazy
 			.compactMap { $0 }
-			.filter { !($0.provider is EmptyRequestProvider) }
 	}
 	
-	init(_ provider: RequestProvider,
+	/**
+	 Internal initializer. To create a `Monarch` responder chain use the SwiftUI
+	 view modifiers or a `Monarch.Builder` object.
+	 */
+	init(_ provider: RequestProvider = EmptyRequestProvider(),
 			 domain: RequestDomain = .any,
 			 next: Monarch? = nil) {
 		self.provider = provider
