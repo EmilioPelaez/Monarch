@@ -16,8 +16,8 @@ struct ExampleApp: App {
 	var body: some Scene {
 		WindowGroup {
 			MainScreen()
-				.registerProvider(imagesClient, domain: .images)
-				.registerProvider(moviesClient, domain: .movies)
+				.register(imagesClient, domain: .images)
+				.register(moviesClient, domain: .movies)
 		}
 	}
 }

@@ -16,7 +16,7 @@ public extension View {
 	 The registered provider will be available to the view that is modified by
 	 this modifier, as well as any descendants.
 	 */
-	func registerProvider(_ provider: RequestProvider, domain: RequestDomain = .any) -> some View {
+	func register(_ provider: RequestProvider, domain: RequestDomain = .any) -> some View {
 		modifier(RegisterProviderModifier(provider: provider, domain: domain))
 	}
 	
