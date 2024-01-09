@@ -1,35 +1,56 @@
 # Monarch 👑 - WIP
 
-A resource based, protocol oriented networking library designed for pure-SwiftUI applications. It's called Monarch because it sits at the top of your view hierarchy.
+A source-agnostic, request-based, protocol-oriented, resource-fetching library designed for pure-SwiftUI applications.
+It's called Monarch because it sits at the top of your view hierarchy.
 
-### Features:
+## Features:
 
  - Async/Await
- - Resource Based
- - Protocol Oriented
+ - Resource-Based
+ - Protocol-Oriented
+ - Source-Agnostic
  - Preview Support
- - Caching Support
  - Extensible
  - All the buzzwords!
 
-### Description
+## Description
 
-Monarch is a network library designed to harness the SwiftUI View Hierarchy to simplify dependency injection.
+Monarch is a library designed to 
 
-To use Monarch, you register one or multiple request providers at a very high level of your view hierarchy.
+Monarch is a resource-fetching library designed to harness the SwiftUI View Hierarchy to simplify dependency injection.
+Resources can be 
+
+## How To Use
+
+### Step 1: Create a Request
+
+`Requests` are one of the basic building blocks of Monarch, they describe a the path to a resrouce. `RemoteRequests` describe the path to a remote resource.
+
+```swift
+struct CurrentUserRequest: RemoteRequest {
+  var path: String { "users/me" }
+  var previewData: User { .example }
+}
+```
+
+### Step 2: Register a Provider
+
+Providers receive `Requests` and turn them into a resource. They are registered in the view hierarchy and available to all views below.
 
 ```swift
 struct MonarchApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .registerProvider(NetworkClient())
+        .register(NetworkClient())
     }
   }
 }
 ```
 
-Any views lower in the view hierarchy can read the `monarch` environment value and use it to execute a request. Because requests contain a `previewData` value, views can be easily previewed in the Preview Canvas.
+### Step 3: Perform the Request
+
+The `monarch` Environment Value uses the providers registered in the View Hierarchy to attempt to provide a resource from a `Request`
 
 ```swift
 struct ContentView: View {
@@ -39,26 +60,32 @@ struct ContentView: View {
   var body: some View {
     Text(user?.name ?? "Loading...")
       .task {
-        do {
-          user = try await monarch.perform(CurrentUserRequest())
-        } catch {
-          print("Whoops")
-        }
+        user = try? await monarch.perform(CurrentUserRequest())
       }
   }
 }
 ```
 
-### Creating a Request
+## Implementation Details
 
-`Requests` are one of the basic building blocks of Monarch. They describe a resource, and can be defined with as few as two values.
+### Chaining Providers
+
+Providers are unlikely to be able to handle every single response.  When multiple providers are registered, `Monarch` will call the `perform` method of every provider, in the order they were registered, and will stop once it gets a response.
+
+`Monarch` will only pass a `Request` to a provider if the provider was registered with a compatible `domain` with the `domain` of the `Request`.
 
 ```swift
-struct CurrentUserRequest: Request {
-  var path: String { "users/me" }
-  var previewData: User { .example }
+extension RequestDomain {
+  static let images = RequestDomain(rawValue: 1 << 0)
 }
+
+ContentView()
+  .register(ImageCache(), domain: .images)
+  .register(ImageClient(), domain: .images)
+  .register(NetworkClient(), domain: .any)
 ```
+
+In this example, any requests in the `images` domain will be received by the `ImageCache`, if no cache value is found, `ImageClient` will fetch the image. Any other requests will be sent directly to `NetworkClient`.
 
 ### The RequestProvider Protocol
 
@@ -68,29 +95,4 @@ struct CurrentUserRequest: Request {
 func perform<R: Request>(_ request: R) async throws -> R.ResponseType
 ```
 
-Network providers use this function to fetch data from the network, while cache providers use it to read values from memory or the disk.
-
-### Chaining Providers
-
-By specifying the `domain` property of a `Request` you can determine which provider should receive that request.
-
-When multiple providers are registered, Monarch will attempt to call them in the order they were registered.
-
-```swift
-extension RequestDomain {
-  static let images = RequestDomain(rawValue: 1 << 0)
-}
-
-struct MonarchApp: App {
-  var body: some Scene {
-    WindowGroup {
-      ContentView()
-        .registerProvider(ImageCache(), domain: .images)
-        .registerProvider(ImageClient(), domain: .images)
-        .registerProvider(NetworkClient(), domain: .any)
-    }
-  }
-}
-```
-
-In this example, any requests in the `images` domain will be received by the `ImageCache`, if no cache value is found, `ImageClient` will fetch the image. Any other requests will be sent directly to `NetworkClient`.
+Network providers use this function to fetch data from the network, cache providers use it to read values from memory or the disk.
