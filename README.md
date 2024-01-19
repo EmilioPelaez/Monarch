@@ -14,11 +14,12 @@ It's called Monarch because it sits at the top of your view hierarchy.
  - All the buzzwords!
 
 ## Description
-
-Monarch is a library designed to 
-
+ 
 Monarch is a resource-fetching library designed to harness the SwiftUI View Hierarchy to simplify dependency injection.
-Resources can be 
+
+Resources are described by requests which are handled by providers, which can determine if the resource should be fetched from the network, the app bundle, a cache, or anywhere else.
+
+Providers are registered into the view hierarchy and are called using a responder chain pattern, meaning that if the first provider fails to fetch the resource, the next one will try. This allows to easily separate different functionality (i.e. caching, networking) into modular providers.
 
 ## How To Use
 
