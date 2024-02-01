@@ -20,6 +20,10 @@ public extension View {
 		modifier(RegisterProviderModifier(provider: provider, domain: domain))
 	}
 	
+	func provider<R: Request>(for request: R.Type, domain: RequestDomain = .any, handler: @escaping (R) async throws -> R.ResponseType) -> some View {
+		modifier(RegisterProviderModifier(provider: GenericProvider(handler: handler), domain: domain))
+	}
+	
 	/**
 	 Performs a request using the request provider found on the environment when
 	 the view appears.
