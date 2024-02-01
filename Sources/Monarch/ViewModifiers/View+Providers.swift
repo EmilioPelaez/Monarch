@@ -29,7 +29,7 @@ public extension View {
 	 The registered provider will be available to the view that is modified by
 	 this modifier, as well as any descendants.
 	 */
-	func provider<R: Request>(for request: R.Type, domain: RequestDomain = .any, handler: @escaping (R) async throws -> R.ResponseType) -> some View {
+	func provider<R: Request>(for _: R.Type, domain: RequestDomain = .any, handler: @escaping (R) async throws -> R.ResponseType) -> some View {
 		modifier(RegisterProviderModifier(provider: GenericProvider(handler: handler), domain: domain))
 	}
 }

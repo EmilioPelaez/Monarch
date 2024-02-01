@@ -4,7 +4,7 @@
 
 import Foundation
 
-extension Monarch {
+public extension Monarch {
 	/**
 	 `Monarch.Builder` objects are used to create a `Monarch` responder chain
 	 outside of the SwiftUI hierarchy.
@@ -24,7 +24,7 @@ extension Monarch {
 	 try await monarch.handle(PopularMoviesRequest())
 	 ```
 	 */
-	public struct Builder {
+	struct Builder {
 		
 		let blocks: [Block]
 		

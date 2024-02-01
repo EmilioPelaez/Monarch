@@ -53,8 +53,8 @@ public class Monarch: RequestProvider, ResponseHandler {
 	 view modifiers or a `Monarch.Builder` object.
 	 */
 	init(_ provider: RequestProvider = EmptyRequestProvider(),
-			 domain: RequestDomain = .any,
-			 next: Monarch? = nil) {
+	     domain: RequestDomain = .any,
+	     next: Monarch? = nil) {
 		self.provider = provider
 		self.domain = domain
 		self.next = next

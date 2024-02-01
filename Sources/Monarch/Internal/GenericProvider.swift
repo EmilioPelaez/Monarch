@@ -7,7 +7,7 @@ import Foundation
 struct GenericProvider<T: Request>: RequestProvider {
 	let handler: (T) async throws -> T.ResponseType
 	
-	func perform<R>(_ request: R) async throws -> R.ResponseType where R : Request {
+	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		guard let viableRequest = request as? T else {
 			throw UnhandledRequestError(request)
 		}
