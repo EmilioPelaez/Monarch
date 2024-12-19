@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,11 +18,37 @@
 		BCBE817D2842D526002C5FE4 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE817C2842D526002C5FE4 /* Image+Data.swift */; };
 		BCBE818128441A78002C5FE4 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE818028441A78002C5FE4 /* RemoteImage.swift */; };
 		BCBE818328442194002C5FE4 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE818228442194002C5FE4 /* ExampleApp.swift */; };
+		C83B306E2D13C60300E47986 /* MonarchExampleWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C83B30612D13C60100E47986 /* MonarchExampleWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C83B30742D13C64600E47986 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C83B30732D13C64600E47986 /* Monarch */; };
 		C8958B1E282A191B00341D09 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C8958B1D282A191B00341D09 /* Monarch */; };
 		C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8958B202831AEE700341D09 /* MemoryCache.swift */; };
 		C8D8E1DB282A187C002F62FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D8E1DA282A187C002F62FD /* Assets.xcassets */; };
 		C8D8E1DE282A187C002F62FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8D8E1DD282A187C002F62FD /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C83B306C2D13C60300E47986 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C8D8E1CB282A187A002F62FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C83B30602D13C60100E47986;
+			remoteInfo = "MonarchExampleWatch Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C83B30722D13C60300E47986 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				C83B306E2D13C60300E47986 /* MonarchExampleWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BCBE81672842BC4C002C5FE4 /* MoviesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesClient.swift; sourceTree = "<group>"; };
@@ -36,6 +62,7 @@
 		BCBE817C2842D526002C5FE4 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		BCBE818028441A78002C5FE4 /* RemoteImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		BCBE818228442194002C5FE4 /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		C83B30612D13C60100E47986 /* MonarchExampleWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonarchExampleWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8958B202831AEE700341D09 /* MemoryCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCache.swift; sourceTree = "<group>"; };
 		C8D8E1D3282A187A002F62FD /* MonarchExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonarchExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8D8E1DA282A187C002F62FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +70,19 @@
 		C8D8E1E5282A188F002F62FD /* Monarch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Monarch; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C83B30622D13C60100E47986 /* MonarchExampleWatch */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MonarchExampleWatch; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		C83B305E2D13C60100E47986 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C83B30742D13C64600E47986 /* Monarch in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8D8E1D0282A187A002F62FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -112,6 +151,7 @@
 			children = (
 				C8D8E1E4282A188F002F62FD /* Packages */,
 				C8D8E1D5282A187A002F62FD /* MonarchExample */,
+				C83B30622D13C60100E47986 /* MonarchExampleWatch */,
 				C8D8E1D4282A187A002F62FD /* Products */,
 				C8958B1C282A191B00341D09 /* Frameworks */,
 			);
@@ -122,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				C8D8E1D3282A187A002F62FD /* MonarchExample.app */,
+				C83B30612D13C60100E47986 /* MonarchExampleWatch.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +202,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		C83B30602D13C60100E47986 /* MonarchExampleWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C83B306F2D13C60300E47986 /* Build configuration list for PBXNativeTarget "MonarchExampleWatch" */;
+			buildPhases = (
+				C83B305D2D13C60100E47986 /* Sources */,
+				C83B305E2D13C60100E47986 /* Frameworks */,
+				C83B305F2D13C60100E47986 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C83B30622D13C60100E47986 /* MonarchExampleWatch */,
+			);
+			name = MonarchExampleWatch;
+			packageProductDependencies = (
+				C83B30732D13C64600E47986 /* Monarch */,
+			);
+			productName = "MonarchExampleWatch Watch App";
+			productReference = C83B30612D13C60100E47986 /* MonarchExampleWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
 		C8D8E1D2282A187A002F62FD /* MonarchExample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C8D8E1E1282A187C002F62FD /* Build configuration list for PBXNativeTarget "MonarchExample" */;
@@ -168,10 +232,12 @@
 				C8D8E1CF282A187A002F62FD /* Sources */,
 				C8D8E1D0282A187A002F62FD /* Frameworks */,
 				C8D8E1D1282A187A002F62FD /* Resources */,
+				C83B30722D13C60300E47986 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C83B306D2D13C60300E47986 /* PBXTargetDependency */,
 			);
 			name = MonarchExample;
 			packageProductDependencies = (
@@ -188,9 +254,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					C83B30602D13C60100E47986 = {
+						CreatedOnToolsVersion = 16.1;
+					};
 					C8D8E1D2282A187A002F62FD = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -210,11 +279,19 @@
 			projectRoot = "";
 			targets = (
 				C8D8E1D2282A187A002F62FD /* MonarchExample */,
+				C83B30602D13C60100E47986 /* MonarchExampleWatch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C83B305F2D13C60100E47986 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8D8E1D1282A187A002F62FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,6 +304,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C83B305D2D13C60100E47986 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C8D8E1CF282A187A002F62FD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,7 +332,86 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		C83B306D2D13C60300E47986 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C83B30602D13C60100E47986 /* MonarchExampleWatch */;
+			targetProxy = C83B306C2D13C60300E47986 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		C83B30702D13C60300E47986 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MonarchExampleWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = FS696NSBK7;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MonarchExampleWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.emiliopelaez.MonarchExample;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emiliopelaez.MonarchExample.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Debug;
+		};
+		C83B30712D13C60300E47986 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MonarchExampleWatch/Preview Content\"";
+				DEVELOPMENT_TEAM = FS696NSBK7;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MonarchExampleWatch;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.emiliopelaez.MonarchExample;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.emiliopelaez.MonarchExample.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.1;
+			};
+			name = Release;
+		};
 		C8D8E1DF282A187C002F62FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -386,9 +549,14 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emiliopelaez.MonarchExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -415,15 +583,29 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.emiliopelaez.MonarchExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C83B306F2D13C60300E47986 /* Build configuration list for PBXNativeTarget "MonarchExampleWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C83B30702D13C60300E47986 /* Debug */,
+				C83B30712D13C60300E47986 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C8D8E1CE282A187A002F62FD /* Build configuration list for PBXProject "MonarchExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -445,6 +627,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C83B30732D13C64600E47986 /* Monarch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Monarch;
+		};
 		C8958B1D282A191B00341D09 /* Monarch */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Monarch;
