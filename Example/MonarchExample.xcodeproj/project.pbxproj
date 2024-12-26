@@ -18,7 +18,7 @@
 		BCBE817D2842D526002C5FE4 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE817C2842D526002C5FE4 /* Image+Data.swift */; };
 		BCBE818128441A78002C5FE4 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE818028441A78002C5FE4 /* RemoteImage.swift */; };
 		BCBE818328442194002C5FE4 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE818228442194002C5FE4 /* ExampleApp.swift */; };
-		C83B306E2D13C60300E47986 /* MonarchExampleWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C83B30612D13C60100E47986 /* MonarchExampleWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C83B306E2D13C60300E47986 /* MonarchExampleWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = C83B30612D13C60100E47986 /* MonarchExampleWatch.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C83B30742D13C64600E47986 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C83B30732D13C64600E47986 /* Monarch */; };
 		C8958B1E282A191B00341D09 /* Monarch in Frameworks */ = {isa = PBXBuildFile; productRef = C8958B1D282A191B00341D09 /* Monarch */; };
 		C8958B212831AEE700341D09 /* MemoryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8958B202831AEE700341D09 /* MemoryCache.swift */; };
@@ -335,6 +335,7 @@
 /* Begin PBXTargetDependency section */
 		C83B306D2D13C60300E47986 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = C83B30602D13C60100E47986 /* MonarchExampleWatch */;
 			targetProxy = C83B306C2D13C60300E47986 /* PBXContainerItemProxy */;
 		};
