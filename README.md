@@ -1,5 +1,7 @@
 # Monarch 👑 - WIP
 
+<img src="SocialImage.png" alt="Social Banner" width="640">
+
 A source-agnostic, request-based, protocol-oriented, resource-fetching library designed for pure-SwiftUI applications.
 It's called Monarch because it sits at the top of your view hierarchy.
 
