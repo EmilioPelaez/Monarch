@@ -1,5 +1,12 @@
 # Monarch 👑 - WIP
 
+<img src="SocialImage.png" alt="Social Banner" width="640">
+
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FEmilioPelaez%2FMonarch%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/EmilioPelaez/Monarch)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FEmilioPelaez%2FMonarch%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/EmilioPelaez/Monarch)
+
+[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://opensource.org/licenses/MIT)
+
 A source-agnostic, request-based, protocol-oriented, resource-fetching library designed for pure-SwiftUI applications.
 It's called Monarch because it sits at the top of your view hierarchy.
 
