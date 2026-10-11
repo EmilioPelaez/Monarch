@@ -74,7 +74,7 @@ public final class Monarch: RequestProvider {
 		} catch is UnhandledRequestError {}
 		let value = try await performNext()
 		if let handler = provider as? ResponseHandler {
-			handler.handle(value, for: request)
+			await handler.handle(value, for: request)
 		}
 		return value
 	}

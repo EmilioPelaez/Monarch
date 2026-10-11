@@ -9,7 +9,7 @@ import Foundation
  */
 public protocol CacheProvider: ResponseHandler {
 	/// Stores the value for a given request.
-	func store<R: Request>(_ value: R.ResponseType, for request: R)
+	func store<R: Request>(_ value: R.ResponseType, for request: R) async
 	/// Attempts to stored value for a given request.
 	func value<R: Request>(for request: R) async -> R.ResponseType?
 }
@@ -20,7 +20,7 @@ public extension CacheProvider {
 		return value
 	}
 	
-	func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
-		store(response, for: request)
+	func handle<R>(_ response: R.ResponseType, for request: R) async where R: Request {
+		await store(response, for: request)
 	}
 }

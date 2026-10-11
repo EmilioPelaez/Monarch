@@ -13,7 +13,8 @@ final class MonarchTests: XCTestCase {
 		let response = try await monarch.perform(TestRequest())
 
 		XCTAssertEqual(response, "response")
-		XCTAssertEqual(log.handlers, ["second", "first"])
+		let handlers = await log.handlers
+		XCTAssertEqual(handlers, ["second", "first"])
 	}
 
 	func testResponseIsNotHandledByTheNodeThatProducedIt() async throws {
@@ -27,7 +28,8 @@ final class MonarchTests: XCTestCase {
 		let response = try await monarch.perform(TestRequest())
 
 		XCTAssertEqual(response, "response")
-		XCTAssertEqual(log.handlers, ["first"])
+		let handlers = await log.handlers
+		XCTAssertEqual(handlers, ["first"])
 	}
 
 	func testResponseDoesNotReachSiblingBranches() async throws {
@@ -37,10 +39,12 @@ final class MonarchTests: XCTestCase {
 		let branchB = Monarch(Handler("b", log), next: root)
 
 		_ = try await branchA.perform(TestRequest())
-		XCTAssertEqual(log.handlers, ["a"])
+		let afterA = await log.handlers
+		XCTAssertEqual(afterA, ["a"])
 
 		_ = try await branchB.perform(TestRequest())
-		XCTAssertEqual(log.handlers, ["a", "b"])
+		let afterB = await log.handlers
+		XCTAssertEqual(afterB, ["a", "b"])
 	}
 
 	func testResponseDoesNotReachNodesBeforeTheOneThatReceivedTheRequest() async throws {
@@ -50,7 +54,8 @@ final class MonarchTests: XCTestCase {
 
 		_ = try await root.perform(TestRequest())
 
-		XCTAssertEqual(log.handlers, [])
+		let handlers = await log.handlers
+		XCTAssertEqual(handlers, [])
 		_ = child
 	}
 
@@ -64,7 +69,8 @@ final class MonarchTests: XCTestCase {
 
 		_ = try await monarch.perform(TestRequest())
 
-		XCTAssertEqual(log.handlers, ["any"])
+		let handlers = await log.handlers
+		XCTAssertEqual(handlers, ["any"])
 	}
 }
 
@@ -86,16 +92,11 @@ private struct Source: RequestProvider {
 }
 
 /// Records the names of the handlers that receive a response, in order.
-private final class Log: @unchecked Sendable {
-	private let lock = NSLock()
-	private var names: [String] = []
-
-	var handlers: [String] {
-		lock.withLock { names }
-	}
+private actor Log {
+	private(set) var handlers: [String] = []
 
 	func append(_ name: String) {
-		lock.withLock { names.append(name) }
+		handlers.append(name)
 	}
 }
 
@@ -116,7 +117,7 @@ private struct Handler: ResponseHandler {
 		return response
 	}
 
-	func handle<R: Request>(_: R.ResponseType, for _: R) {
-		log.append(name)
+	func handle<R: Request>(_: R.ResponseType, for _: R) async {
+		await log.append(name)
 	}
 }
