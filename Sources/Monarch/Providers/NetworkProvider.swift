@@ -46,7 +46,7 @@ public extension NetworkProvider {
 		guard !request.query.isEmpty else {
 			return url
 		}
-		let items = request.query.map { URLQueryItem(name: $0, value: "\($1)") }
+		let items = request.query.map { URLQueryItem(name: $0, value: $1) }
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
 			throw URLBuilderError()
 		}

@@ -17,7 +17,7 @@ import Foundation
  }
  ```
  */
-public protocol Request: Sendable {
+public protocol Request: Sendable, Identifiable where ID == String {
 	/// The type of the response expected from this request
 	associatedtype ResponseType: Sendable
 	

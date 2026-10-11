@@ -18,7 +18,7 @@ final class MoviesClient: NetworkProvider {
 	
 	func buildURL<R: RemoteRequest>(for request: R) throws -> URL {
 		let url = baseURL.appendingPathComponent(request.path)
-		var items = request.query.map { URLQueryItem(name: $0, value: "\($1)") }
+		var items = request.query.sorted(by: <).map { URLQueryItem(name: $0, value: $1) }
 		items.append(URLQueryItem(name: "api_key", value: "14445b52889b7cb98967f7b8a7c9ab2c"))
 		guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
 			throw URLBuilderError()

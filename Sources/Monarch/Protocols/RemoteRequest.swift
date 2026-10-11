@@ -15,24 +15,29 @@ public protocol RemoteRequest: Request {
 	var method: HTTPMethod { get }
 	/// An optional HTTP body. `nil` by default.
 	var body: HTTPBody? { get }
-	/// The HTTP query. Empty by default.
-	var query: [String: Any] { get }
+	/// The URL query. Values are sent as they are, so they should be formatted
+	/// the way the server expects them. Empty by default.
+	var query: [String: String] { get }
+	
+	/// The decoder used for `Decodable` responses. A new `JSONDecoder` by default.
+	var decoder: JSONDecoder { get }
 	
 	/// Returns a value of the type `ResponseType` from a `Data` object.
-	/// For `Decodable` responses, it uses a `JSONDecoder` by default.
+	/// For `Decodable` responses, it uses `decoder` by default.
 	func decode(_ data: Data) throws -> ResponseType
 }
 
 public extension RemoteRequest {
-	var id: String { path + method.string + String(describing: query) }
+	var id: String { path + method.string + String(describing: query.sorted(by: <)) }
 	
 	var method: HTTPMethod { .GET }
 	var body: HTTPBody? { nil }
-	var query: [String: Any] { [:] }
+	var decoder: JSONDecoder { JSONDecoder() }
+	var query: [String: String] { [:] }
 }
 
 public extension RemoteRequest where ResponseType: Decodable {
 	func decode(_ data: Data) throws -> ResponseType {
-		try JSONDecoder().decode(ResponseType.self, from: data)
+		try decoder.decode(ResponseType.self, from: data)
 	}
 }
