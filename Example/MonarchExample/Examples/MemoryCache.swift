@@ -2,6 +2,7 @@
 //  Created by Emilio Peláez on 23/04/22.
 //
 
+import Foundation
 import Monarch
 
 /**
@@ -9,14 +10,15 @@ import Monarch
  
  You probably shouldn't use this on production.
  */
-class MemoryCache: CacheProvider {
-	var values: [String: Any] = [:]
+final class MemoryCache: CacheProvider, @unchecked Sendable {
+	private let lock = NSLock()
+	private var values: [String: any Sendable] = [:]
 	
 	func store<R>(_ value: R.ResponseType, for request: R) where R: Request {
-		values[request.id] = value
+		lock.withLock { values[request.id] = value }
 	}
 	
 	func value<R>(for request: R) -> R.ResponseType? where R: Request {
-		values[request.id] as? R.ResponseType
+		lock.withLock { values[request.id] as? R.ResponseType }
 	}
 }

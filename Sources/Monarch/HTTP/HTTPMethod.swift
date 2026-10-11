@@ -5,7 +5,7 @@
 import Foundation
 
 /// An enum of the possible HTTP verbs for an HTTP request
-public enum HTTPMethod {
+public enum HTTPMethod: Sendable {
 	case GET
 	case POST
 	case PUT

@@ -4,7 +4,7 @@
 
 import Foundation
 
-class EmptyRequestProvider: RequestProvider {
+struct EmptyRequestProvider: RequestProvider {
 	func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
 		throw UnhandledRequestError(request)
 	}

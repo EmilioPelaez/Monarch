@@ -8,11 +8,11 @@ import Foundation
  A type describing the body of an HTTP request. The body will always be
  stored as `Data`, but an `HTTPBody` can be initialized in different ways.
  */
-public struct HTTPBody {
+public struct HTTPBody: Sendable {
 	public struct StringEncodingError: Error {}
 	
 	/// The HTTP content type of the body
-	public enum ContentType {
+	public enum ContentType: Sendable {
 		case textPlain
 		case applicationJson
 		case custom(String)

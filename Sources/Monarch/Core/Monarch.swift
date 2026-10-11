@@ -20,7 +20,7 @@ import Foundation
  before reaching it, in the reverse order. The provider that produced the
  response does not receive it.
  */
-public class Monarch: RequestProvider {
+public final class Monarch: RequestProvider {
 	/**
 	 The `provider` is the object that encapsulates the logic of how to handle a
 	 specific kind of Request

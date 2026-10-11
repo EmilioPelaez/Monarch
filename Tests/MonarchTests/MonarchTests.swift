@@ -86,8 +86,17 @@ private struct Source: RequestProvider {
 }
 
 /// Records the names of the handlers that receive a response, in order.
-private final class Log {
-	var handlers: [String] = []
+private final class Log: @unchecked Sendable {
+	private let lock = NSLock()
+	private var names: [String] = []
+
+	var handlers: [String] {
+		lock.withLock { names }
+	}
+
+	func append(_ name: String) {
+		lock.withLock { names.append(name) }
+	}
 }
 
 /// Logs the responses it receives. Passes requests to the next provider unless `responds` is set.
@@ -108,6 +117,6 @@ private struct Handler: ResponseHandler {
 	}
 
 	func handle<R: Request>(_: R.ResponseType, for _: R) {
-		log.handlers.append(name)
+		log.append(name)
 	}
 }

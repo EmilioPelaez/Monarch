@@ -12,8 +12,8 @@ import Foundation
  as simple as defining a `baseURL`.
  
  ```
- class NetworkClient: NetworkProvider {
-	 var baseURL = URL(string: myURL)!
+ struct NetworkClient: NetworkProvider {
+	 let baseURL = URL(string: myURL)!
  }
  ```
  */

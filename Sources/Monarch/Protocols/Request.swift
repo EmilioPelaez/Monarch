@@ -17,9 +17,9 @@ import Foundation
  }
  ```
  */
-public protocol Request {
+public protocol Request: Sendable {
 	/// The type of the response expected from this request
-	associatedtype ResponseType
+	associatedtype ResponseType: Sendable
 	
 	/// A unique identifier for the request.
 	var id: String { get }

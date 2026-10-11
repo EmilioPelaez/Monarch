@@ -8,8 +8,8 @@
 import Foundation
 import Monarch
 
-class MoviesClient: NetworkProvider {
-	var baseURL: URL = {
+final class MoviesClient: NetworkProvider {
+	let baseURL: URL = {
 		guard let url = URL(string: "https://api.themoviedb.org/3/") else {
 			fatalError()
 		}

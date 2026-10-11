@@ -8,7 +8,7 @@ import Foundation
  Request providers receive a request and must return a response of the
  `R.ResponseType` type.
  */
-public protocol RequestProvider {
+public protocol RequestProvider: Sendable {
 	/**
 	 Receives a generic request and returns a value of the type `R.ResponseType`.
 	 

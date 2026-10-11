@@ -8,8 +8,8 @@
 import Foundation
 import Monarch
 
-class ImagesClient: NetworkProvider {
-	var baseURL: URL = {
+final class ImagesClient: NetworkProvider {
+	let baseURL: URL = {
 		guard let url = URL(string: "https://image.tmdb.org/t/p/w500/") else {
 			fatalError()
 		}

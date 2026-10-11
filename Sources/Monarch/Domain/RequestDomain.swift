@@ -24,7 +24,7 @@ import Foundation
 	 .registerProvider(ImageClient(), domain: .images)
  ```
  */
-public struct RequestDomain: OptionSet {
+public struct RequestDomain: OptionSet, Sendable {
 	public let rawValue: Int
 	
 	public init(rawValue: Int) {
