@@ -34,6 +34,13 @@ public protocol NetworkProvider: RequestProvider {
 	func configureURL(_ url: inout URL) throws
 	/// Customization point for the final URLRequest
 	func configureURLRequest(_ urlRequest: inout URLRequest) throws
+	
+	/// Overrides the request to return a specific response. Useful for edge cases.
+	/// Defaults to nil, which allows the request to be performed normally.
+	func intercept<R: RemoteRequest>(_ request: R) async throws -> R.ResponseType?
+	/// Allows access and manipulation to the data received. Useful for inspection, logs,
+	/// analytics, and data transformations.
+	func process<R: RemoteRequest>(_ data: inout Data, for request: R) async throws
 }
 
 public extension NetworkProvider {
@@ -79,14 +86,25 @@ public extension NetworkProvider {
 }
 
 public extension NetworkProvider {
+	func intercept<R: RemoteRequest>(_: R) async throws -> R.ResponseType? { nil }
+	
+	func process<R: RemoteRequest>(_: inout Data, for _: R) async throws {}
+}
+
+public extension NetworkProvider {
 	func perform<R: Request>(_ request: R) async throws -> R.ResponseType {
 		guard let request = request as? any RemoteRequest else { throw UnhandledRequestError(request) }
+		if let response = try await intercept(request) as? R.ResponseType {
+			return response
+		}
 		var url = try buildURL(for: request)
 		try configureURL(&url)
 		var urlRequest = try buildURLRequest(with: url, for: request)
 		try configureURLRequest(&urlRequest)
-		let (data, response) = try await session.data(for: urlRequest)
-		try validate(data: data, response: response)
+		let (received, response) = try await session.data(for: urlRequest)
+		try validate(data: received, response: response)
+		var data = received
+		try await process(&data, for: request)
 		guard let response = try request.decode(data) as? R.ResponseType else {
 			fatalError()
 		}
