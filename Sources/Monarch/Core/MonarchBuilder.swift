@@ -21,7 +21,7 @@ public extension Monarch {
 		 .next(moviesClient)
 		 .build()
 	 
-	 try await monarch.handle(PopularMoviesRequest())
+	 try await monarch.perform(PopularMoviesRequest())
 	 ```
 	 */
 	struct Builder {

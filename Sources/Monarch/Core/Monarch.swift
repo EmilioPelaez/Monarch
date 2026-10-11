@@ -15,11 +15,12 @@ import Foundation
  If the `Request` reaches the end of the chain without being handled, an
  `UnhandledRequestError` will be thrown.
  
- Once a `RequestProvider` has produced a response, the `handle` method will be
- called on the same `Monarch` node that produced the response, and then on all
- the nodes the request passed through, in the reverse order.
+ Once a `RequestProvider` has produced a response, the response is passed to
+ the `ResponseHandler` providers of all the nodes the request passed through
+ before reaching it, in the reverse order. The provider that produced the
+ response does not receive it.
  */
-public class Monarch: RequestProvider, ResponseHandler {
+public class Monarch: RequestProvider {
 	/**
 	 The `provider` is the object that encapsulates the logic of how to handle a
 	 specific kind of Request
@@ -36,7 +37,6 @@ public class Monarch: RequestProvider, ResponseHandler {
 	 able to.
 	 */
 	let next: Monarch?
-	private(set) weak var previous: Monarch?
 	
 	/**
 	 A list of all the nodes in the current responder chain in the order they will
@@ -58,29 +58,25 @@ public class Monarch: RequestProvider, ResponseHandler {
 		self.provider = provider
 		self.domain = domain
 		self.next = next
-		
-		next?.previous = self
 	}
 	
 	public func perform<R>(_ request: R) async throws -> R.ResponseType where R: Request {
-		do {
-			guard domain.contains(request.domain) else { throw UnhandledRequestError(request) }
-			let value = try await provider.perform(request)
-			previous?.handle(value, for: request)
-			return value
-		} catch is UnhandledRequestError {
+		func performNext() async throws -> R.ResponseType where R: Request {
 			guard let next = next else { throw UnhandledRequestError(request) }
 			return try await next.perform(request)
-		} catch {
-			throw error
 		}
-	}
-	
-	public func handle<R>(_ response: R.ResponseType, for request: R) where R: Request {
+		
+		guard domain.contains(request.domain) else {
+			return try await performNext()
+		}
+		do {
+			return try await provider.perform(request)
+		} catch is UnhandledRequestError {}
+		let value = try await performNext()
 		if let handler = provider as? ResponseHandler {
-			handler.handle(response, for: request)
+			handler.handle(value, for: request)
 		}
-		previous?.handle(response, for: request)
+		return value
 	}
 }
 
